@@ -8,7 +8,7 @@ var ProjectManager = {
 		var proj = null;
 		for(space in projectList){
 			proj = projectList[space];
-			$("#project-space-wrapper").append("<li> <span class='project-title'>"+proj.projectName+"</span>    <span class='time-remaining'>  </span>  </li>");
+			$("#project-space-wrapper").append("<li> <span class='project-title'>"+proj.projectName+"</span>    <span class='time-remaining'>  </span>    <span class='resource'> Resource(s):"+proj.resources[0]+"<span> </li>");
 
 		}
 	},

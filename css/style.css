@@ -30,3 +30,9 @@ span.time-remaining{
 	display: block;	
 	text-shadow: 0px -1px 1px rgb(71, 81, 138);
 }
+
+span.resource{
+	color: rgb(107, 107, 107);
+	font-weight:bold;
+
+}
