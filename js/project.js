@@ -8,7 +8,7 @@ var ProjectManager = {
 		var proj = null;
 		for(space in projectList){
 			proj = projectList[space];
-			$("#project-space-wrapper").append("<li> <span class='project-title'>"+proj.projectName+"</span>    <span class='time-remaining'>  </span>    <span class='resource'> Resource(s):"+proj.resources[0]+"<span> </li>");
+			$("#project-space-wrapper").append("<li> <span class='project-title'>"+proj.projectName+"</span>    <br><span class='due'> End Date: "+ proj.endDate.toLocaleDateString() +" </span>  <span class='time-remaining'>  </span>  <hr>   <span class='resource'> Resource(s): <br>"+ proj.getResources() +"<span> </li>");
 
 		}
 	},
@@ -16,10 +16,10 @@ var ProjectManager = {
 	timerLoop : function(){
 		for(space in projectList){
 			var t = projectList[space].timeRemaining();
-			$(".time-remaining").eq(space).html(t.d + " Days " + t.h + " Hours " + t.m + " Minutes " + t.s + " Seconds Remaining");
+			$(".time-remaining").eq(space).html(t.d + " Days " + t.h + " Hours Remaining");
 		}
 
-		setTimeout(ProjectManager.timerLoop, 1000);
+		setTimeout(ProjectManager.timerLoop, 30000);
 	}
 };
 
@@ -69,7 +69,13 @@ var Project = (function(){
 			s %= 60;
 			return {d:d, h:h, m:m, s:s};
 		},
-
+		getResources : function(){
+			var rsrs = "";
+			for(res in this.resources){
+				rsrs += this.resources[res] + "<br>";
+			}
+			return rsrs;
+		}
 	};
 
 	return Project;
@@ -78,7 +84,7 @@ var Project = (function(){
 
 
 var addYourFlavor = new Project("Add Your Flavor", "March 7 2013", "April 24 2013", ["Josh"]);  	//	Example
-var ultimateSpot = new Project("The Ultimate Spot", "March 28 2013", "May 23 2013", ["Josh"]);		// 	Example
+var ultimateSpot = new Project("The Ultimate Spot", "March 28 2013", "May 23 2013", ["Josh", "Brandon"]);		// 	Example
 var linkRelocation = new Project("Link Relocation", "April 5 2013","May 9 2013", ["Josh"]);			//	More Example
 
 $(document).ready(function(){
@@ -92,5 +98,4 @@ $(document).ready(function(){
 	);
 
 	ProjectManager.timerLoop();
-
 });
